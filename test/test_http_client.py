@@ -7,7 +7,7 @@ from buddybet_transactionmanager.schemas.http_response_schema import HttpRespons
 @pytest.fixture
 def client(monkeypatch):
     # Forzamos entorno DEV para desactivar SSL
-    monkeypatch.setenv("APP_ENV", "DEV")
+    monkeypatch.setenv("APP_ENV", "dev")
     return HttpClient(base_url="https://api.test.com")
 
 
