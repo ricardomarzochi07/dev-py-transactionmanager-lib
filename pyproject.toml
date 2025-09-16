@@ -1,0 +1,27 @@
+[project]
+name = "buddybet_transactionmanager"
+version = "0.1.0"
+description = "Lib for manager Transaction HTTPs"
+authors = [
+    {name = "ricardomarzochi07",email = "ricardomarzochi@gmail.com"}
+]
+keywords = ["http", "https", "Transaction", "request", "security"]
+homepage = "https://github.com/tuusuario/jwt-validator"
+repository = "https://github.com/tuusuario/jwt-validator"
+documentation = "https://github.com/tuusuario/jwt-validator"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "buddybet-logmon-common (>=0.1.0,<0.2.0)"
+]
+packages = [
+    { include = "buddybet_transactionmanager", from = "src" }
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.2"
+pytest-mock = "^3.15.1"
+
