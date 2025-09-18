@@ -1,16 +1,14 @@
 from typing import Optional, TypeVar, Generic
+from pydantic import BaseModel
 
 T = TypeVar('T')
 
 
-class HttpResponseSchema(Generic[T]):
-
-    def __init__(self, status_response: bool = False, status_code: int = 0,
-                 data: Optional[T] = None, message: Optional[str] = None):
-        self.status_response: bool = status_response
-        self.status_code: int = status_code
-        self.data: Optional[T] = data
-        self.message: Optional[str] = message
+class HttpResponseSchema(BaseModel, Generic[T]):
+    status_response: bool = False
+    status_code: int = 0
+    data: Optional[T] = None
+    message: Optional[str] = None
 
     def __repr__(self):
         return (f"HttpResponseSchema(status_response={self.status_response}, "
