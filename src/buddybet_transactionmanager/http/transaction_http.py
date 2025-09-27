@@ -2,6 +2,7 @@ import httpx
 from typing import Optional, Dict, Any
 from buddybet_logmon_common.logger import get_logger
 from .constants import Constants
+from .exceptions import RequestRetriesExceeded
 from ..schemas.http_response_schema import HttpResponseSchema
 import os
 
@@ -67,11 +68,9 @@ class HttpClient:
                 last_exception = e
 
         # Si llegó aquí es que fallaron todos los intentos
-        return HttpResponseSchema(
-            status_response=False,
-            status_code=0,
-            data=None,
-            message=f"Request failed after {Constants.RETRIES} attempts: {str(last_exception)}"
+        raise RequestRetriesExceeded(
+            message=f"Request failed after {Constants.RETRIES} attempts: {str(last_exception)}",
+            cause=last_exception
         )
 
     def get(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None):
