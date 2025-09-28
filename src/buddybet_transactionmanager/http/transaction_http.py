@@ -45,7 +45,7 @@ class HttpClient:
                 response.raise_for_status()
 
                 try:
-                    if response.content and 'application/json' in response.headers.get('Content-Type', ''):
+                    if response.content and 'json' in response.headers.get('Content-Type', '').lower():
                         data = response.json()
                     else:
                         data = None
