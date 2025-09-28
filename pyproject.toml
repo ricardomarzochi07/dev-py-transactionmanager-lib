@@ -1,6 +1,6 @@
 [project]
 name = "buddybet_transactionmanager"
-version = "0.3.1"
+version = "0.4.1"
 description = "Lib for manager Transaction HTTPs"
 authors = [
     {name = "ricardomarzochi07",email = "ricardomarzochi@gmail.com"}

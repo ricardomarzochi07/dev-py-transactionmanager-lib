@@ -5,7 +5,7 @@ from .constants import Constants
 from .exceptions import RequestRetriesExceeded
 from ..schemas.http_response_schema import HttpResponseSchema
 import os
-
+import json
 
 class HttpClient:
     logger = get_logger()
@@ -44,11 +44,20 @@ class HttpClient:
                 response = self.client.request(method, path, headers=combined_headers, **kwargs)
                 response.raise_for_status()
 
+                try:
+                    if response.content and 'application/json' in response.headers.get('Content-Type', ''):
+                        data = response.json()
+                    else:
+                        data = None
+                except json.JSONDecodeError:
+                    self.logger.warning(f"No se pudo decodificar JSON: {response.content}")
+                    data = None
+
                 self.logger.info(f"HTTP {method.upper()} {path} -> {response.status_code}")
                 return HttpResponseSchema(
                     status_response=True,
                     status_code=response.status_code,
-                    data=response.json(),
+                    data=data,
                     message="Request successful"
                 )
 
